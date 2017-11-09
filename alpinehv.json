@@ -1,0 +1,55 @@
+{
+    "builders": [
+        {
+            "type": "hyperv-iso",
+            "iso_url": "http://dl-cdn.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-standard-3.6.2-x86_64.iso",
+            "iso_checksum": "ddf8b91cc0d2b1c110f26607d410e5c951eedff9c60d6eb05d220b87c1970840",
+            "iso_checksum_type": "sha256",
+            "disk_size": "1024",
+            "skip_compaction": "true",
+            "communicator": "ssh",
+            "ssh_username": "root",
+            "ssh_password": "alpine",
+            "http_directory": "http",
+            "http_port_min": "8080",
+            "http_port_max": "8080",
+            "switch_name": "Default Switch",
+            "boot_wait": "10s",
+            "boot_command": [
+                "root<enter><wait>",
+                "ifconfig eth0 up && udhcpc -i eth0<enter><wait10>",
+                "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers<enter><wait>",
+                "setup-alpine -f answers<enter><wait5>",
+                "alpine<enter><wait>",
+                "alpine<enter><wait>",
+                "<wait10><wait10><wait10>",
+                "y<enter>",
+                "<wait10><wait10><wait10>",
+                "<wait10><wait10><wait10>",
+                "rc-service sshd stop<enter>",
+                "mount /dev/sda3 /mnt<enter>",
+                "echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config<enter>",
+                "umount /mnt<enter>",
+                "eject -s /dev/cdrom<enter>",
+                "reboot<enter>",
+                "<wait10><wait10><wait10>",
+                "root<enter><wait>",
+                "alpine<enter><wait>",
+                "apk add hvtools<enter><wait>",
+                "rc-update add hv_kvp_daemon default<enter><wait>",
+                "reboot<enter>"
+            ],
+            "shutdown_command": "poweroff",
+            "generation": 1,
+            "enable_secure_boot": false
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "apk update && apk upgrade"
+            ]
+        }
+    ]
+}
