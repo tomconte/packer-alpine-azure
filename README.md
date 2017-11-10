@@ -32,4 +32,12 @@ packer build alpinehv.json
 
 To use the image in Azure, you need to convert the image to VHD using `convert.ps1`.
 
-Finally the `deploy.cmd` script will upload the VHD to Azure and start a VM based on the image. Please amend the script variables as necessary.
+The `deploy.cmd` script will upload the VHD to Azure and start a VM based on the image. Please amend the script variables as necessary.
+
+Once the VM is started, you can log on via `ssh` and make any additional changes. Then deprovision the VM to get it ready to be used as an image:
+
+```
+waagent -deprovision
+```
+
+Finally, `makeimage.cmd` will deallocate the VM, capture it as an image, and start another VM based on that image.
