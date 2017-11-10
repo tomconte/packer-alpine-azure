@@ -2,6 +2,7 @@ apk update && apk upgrade
 
 # Pre-reqs for WALinuxAgent
 apk add openssl
+apk add shadow
 apk add python py-setuptools
 
 # Install WALinuxAgent
@@ -18,3 +19,17 @@ update-extlinux
 
 # sshd configuration
 sed -i 's/^#ClientAliveInterval 0/ClientAliveInterval 180/' /etc/ssh/sshd_config
+
+# Start waagent at boot
+cat > /etc/init.d/waagent <<EOF
+#!/sbin/openrc-run                                                                 
+                                                                                   
+start() {                                                                          
+        ebegin "Starting waagent"                                                  
+        start-stop-daemon --start --exec /usr/sbin/waagent --name waagent -- -start
+        eend $? "Failed to start waagent"                                          
+}
+EOF
+
+chmod +x /etc/init.d/waagent
+rc-update add waagent default
