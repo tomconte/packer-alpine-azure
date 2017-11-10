@@ -9,7 +9,16 @@ This Packer template will generate a VHD suitable for use in Hyper-V or Azure.
 - The `answers` file is served using Packer's built-in HTTP server.
 - It also installs the `hvtools` package and enables the `hv_kvp_daemon` service so Hyper-V can detect the VM is running and retrieve its IP address. (Read more about [Hyper-V Integration Services](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/manage-hyper-v-integration-services#start-and-stop-an-integration-service-from-a-linux-guest).)
 
-The template does not currently perform any additional provisioning steps.
+## Software installed
+
+The Packer provisioning step performs the following actions in order to prepare a proper Azure image:
+
+- Installs Python and OpenSSL
+- Installs the `shadow` package (for `useradd`)
+- Installs the [Azure Linux Agent](https://github.com/Azure/WALinuxAgent/)
+- Adds recommended boot parameters
+- Sets the `ssh` client interval to 180
+- Enables the Azure Agent to start at boot
 
 ## How to use the template
 
