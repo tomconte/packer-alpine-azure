@@ -1,3 +1,6 @@
+# Community package required for shadow
+echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories
+
 apk update && apk upgrade
 
 # Pre-reqs for WALinuxAgent
