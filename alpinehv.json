@@ -47,9 +47,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "inline": [
-                "apk update && apk upgrade"
-            ]
+            "script": "provision.sh"
         }
     ]
 }
