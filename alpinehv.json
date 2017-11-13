@@ -46,6 +46,11 @@
     ],
     "provisioners": [
         {
+            "type": "file",
+            "source": "useradd.sh",
+            "destination": "/tmp/useradd.sh"
+        },
+        {
             "type": "shell",
             "script": "provision.sh"
         }

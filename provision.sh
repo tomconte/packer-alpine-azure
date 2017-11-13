@@ -4,8 +4,7 @@ echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositor
 apk update && apk upgrade
 
 # Pre-reqs for WALinuxAgent
-apk add openssl
-apk add shadow
+apk add openssl sudo bash shadow
 apk add python py-setuptools
 
 # Install WALinuxAgent
@@ -36,3 +35,13 @@ EOF
 
 chmod +x /etc/init.d/waagent
 rc-update add waagent default
+
+# Workaround for default password
+# Basically, useradd on Alpine locks the account by default if no password
+# was given, and the user can't login, even via ssh public keys. The useradd.sh script
+# changes the default password to a non-valid but non-locking string.
+# The useradd.sh script is installed in /usr/local/sbin, which takes precedence
+# by default over /usr/sbin where the real useradd command lives.
+mkdir -p /usr/local/sbin
+mv /tmp/useradd.sh /usr/local/sbin/useradd
+chmod +x /usr/local/sbin/useradd
