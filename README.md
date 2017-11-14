@@ -43,3 +43,8 @@ waagent -deprovision
 ```
 
 Finally, `makeimage.cmd` will deallocate the VM, capture it as an image, and start another VM based on that image.
+
+## TODO
+
+- Add `parted` and test
+- Add `iptables` and test
