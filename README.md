@@ -13,12 +13,14 @@ This Packer template will generate a VHD suitable for use in Hyper-V or Azure.
 
 The Packer provisioning step performs the following actions in order to prepare a proper Azure image:
 
-- Installs Python and OpenSSL
+- Installs Python and OpenSSL, plus `sudo` and `bash`
 - Installs the `shadow` package (for `useradd`)
 - Installs the [Azure Linux Agent](https://github.com/Azure/WALinuxAgent/)
 - Adds recommended boot parameters
 - Sets the `ssh` client interval to 180
 - Enables the Azure Agent to start at boot
+
+The template also installs a custom `useradd` script (in `/usr/local/sbin`) that changes the behavior of adding password-less accounts (i.e. accounts that log in using SSH keys). By default `useradd` locks the password-less account, preventing it from logging in. The custom script forces an illegal password, so that the password cannot be used to log in, but leaves the account unlocked so it can be access via SSH.
 
 ## How to use the template
 
