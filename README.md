@@ -46,5 +46,5 @@ Finally, `makeimage.cmd` will deallocate the VM, capture it as an image, and sta
 
 ## TODO
 
-- Add `parted` and test
-- Add `iptables` and test
+- Review/tweak boot command based on [ladar's comment](https://github.com/hashicorp/packer/issues/5049#issuecomment-343531173)
+- Investigate `iptables` error messages
