@@ -4,7 +4,7 @@ echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositor
 apk update && apk upgrade
 
 # Pre-reqs for WALinuxAgent
-apk add openssl sudo bash shadow
+apk add openssl sudo bash shadow parted iptables sfdisk
 apk add python py-setuptools
 
 # Install WALinuxAgent
