@@ -36,7 +36,9 @@
                 "root<enter><wait>",
                 "alpine<enter><wait>",
                 "apk add hvtools<enter><wait>",
+                "rc-update add hv_fcopy_daemon default<enter><wait>",
                 "rc-update add hv_kvp_daemon default<enter><wait>",
+                "rc-update add hv_vss_daemon default<enter><wait>",
                 "reboot<enter>"
             ],
             "shutdown_command": "poweroff",
