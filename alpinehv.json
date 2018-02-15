@@ -1,7 +1,8 @@
 {
     "builders": [
         {
-            "type": "hyperv-iso",
+            "type": "qemu",
+            "accelerator": "kvm",
             "iso_url": "http://dl-cdn.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.2-x86_64.iso",
             "iso_checksum": "92c80e151143da155fb99611ed8f0f3672fba4de228a85eb5f53bcb261bf4b0a",
             "iso_checksum_type": "sha256",
@@ -13,8 +14,7 @@
             "http_directory": "http",
             "http_port_min": "8080",
             "http_port_max": "8080",
-            "switch_name": "Default Switch",
-            "boot_wait": "10s",
+            "boot_wait": "20s",
             "boot_command": [
                 "root<enter><wait>",
                 "ifconfig eth0 up && udhcpc -i eth0<enter><wait10>",
@@ -27,23 +27,20 @@
                 "<wait10><wait10><wait10>",
                 "<wait10><wait10><wait10>",
                 "rc-service sshd stop<enter>",
-                "mount /dev/sda3 /mnt<enter>",
+                "mount /dev/vda3 /mnt<enter>",
                 "echo 'PermitRootLogin yes' >> /mnt/etc/ssh/sshd_config<enter>",
                 "umount /mnt<enter>",
                 "eject -s /dev/cdrom<enter>",
                 "reboot<enter>",
-                "<wait10><wait10><wait10>",
+                "<wait10><wait10><wait10><wait10>",
                 "root<enter><wait>",
                 "alpine<enter><wait>",
                 "apk add hvtools<enter><wait>",
                 "rc-update add hv_fcopy_daemon default<enter><wait>",
                 "rc-update add hv_kvp_daemon default<enter><wait>",
-                "rc-update add hv_vss_daemon default<enter><wait>",
-                "reboot<enter>"
+                "rc-update add hv_vss_daemon default<enter><wait>"
             ],
-            "shutdown_command": "poweroff",
-            "generation": 1,
-            "enable_secure_boot": false
+            "shutdown_command": "poweroff"
         }
     ],
     "provisioners": [
