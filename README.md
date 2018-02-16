@@ -24,6 +24,14 @@ The template also installs a custom `useradd` script (in `/usr/local/sbin`) that
 
 ## How to use the template
 
+### On Linux, using `qemu`
+
+Check out the `packer-qemu` branch for a WIP version that builds the Alpine image using `qemu`, allowing you to generate the image from a Linux machine.
+
+Detailed docs TBD, but the Windows instructions below should help.
+
+### On Windows, using Hyper-V
+
 The commands need to be run from an elevated PowerShell prompt so that they can interact with Hyper-V.
 
 First run the template. This will generate a VHDX file locally, in `output-hyperv-iso`.
