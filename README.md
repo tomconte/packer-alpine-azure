@@ -4,7 +4,7 @@ This Packer template will generate a VHD suitable for use in Hyper-V or Azure.
 
 ## How it works
 
-- The Packer template downloads the Alpine 3.6 ISO from the official download site.
+- The Packer template downloads the Alpine 3.8 ISO from the official download site.
 - It then uses `setup-alpine` to perform an [installation to disk](https://wiki.alpinelinux.org/wiki/Install_to_disk).
 - The `answers` file is served using Packer's built-in HTTP server.
 - It also installs the `hvtools` package and enables the `hv_kvp_daemon` service so Hyper-V can detect the VM is running and retrieve its IP address. (Read more about [Hyper-V Integration Services](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/manage-hyper-v-integration-services#start-and-stop-an-integration-service-from-a-linux-guest).)
