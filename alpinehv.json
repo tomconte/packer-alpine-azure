@@ -13,7 +13,7 @@
             "http_directory": "http",
             "http_port_min": "8080",
             "http_port_max": "8080",
-            "switch_name": "Default Switch",
+            "switch_name": "\"Default Switch\"",
             "boot_wait": "10s",
             "boot_command": [
                 "root<enter><wait>",
